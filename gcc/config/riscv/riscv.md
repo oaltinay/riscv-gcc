@@ -45,6 +45,9 @@
   UNSPEC_LRINT
   UNSPEC_LROUND
 
+  ;; Bitmanip
+  UNSPEC_PCNTW
+
   ;; Stack tie
   UNSPEC_TIE
 
@@ -2662,6 +2665,14 @@
    (const_int 0)]
   ""
   "")
+
+(define_insn "riscv_pcntw"
+  [(set (match_operand:SI 0 "register_operand" "=r")
+	(unspec
+	    [(match_operand:SI 1 "register_operand" "r")]
+	    UNSPEC_PCNTW))]
+  ""
+  "pcntw\t%0,%1")
 
 (define_insn "riscv_frflags"
   [(set (match_operand:SI 0 "register_operand" "=r")
