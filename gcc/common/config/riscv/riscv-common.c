@@ -60,6 +60,9 @@ static const riscv_implied_info_t riscv_implied_info[] =
   {"d", "f"},
   {"f", "zicsr"},
   {"d", "zicsr"},
+
+  {"v", "zvamo"},
+  {"v", "zvlsseg"},
   {NULL, NULL}
 };
 
@@ -112,6 +115,11 @@ static const struct riscv_ext_version riscv_ext_version_table[] =
   {"zifencei", ISA_SPEC_CLASS_20190608, 2, 0},
 
   {"zfh", ISA_SPEC_CLASS_NONE, 0, 1},
+
+  {"v",       ISA_SPEC_CLASS_NONE, 1, 0},
+  {"zvamo",   ISA_SPEC_CLASS_NONE, 1, 0},
+  {"zvlsseg", ISA_SPEC_CLASS_NONE, 1, 0},
+  {"zvqmac",  ISA_SPEC_CLASS_NONE, 1, 0},
 
   /* Terminate the list.  */
   {NULL, ISA_SPEC_CLASS_NONE, 0, 0}
@@ -705,6 +713,8 @@ riscv_subset_list::parse_std_ext (const char *p)
   while (*p)
     {
       char subset[2] = {0, 0};
+      int default_major_version = 2;
+      int default_minor_version = 0;
 
       if (*p == 'x' || *p == 's' || *p == 'h' || *p == 'z')
 	break;
@@ -734,6 +744,12 @@ riscv_subset_list::parse_std_ext (const char *p)
 	}
 
       std_exts++;
+
+      if (*p == 'v')
+	{
+	  default_major_version = 0;
+	  default_minor_version = 9;
+	}
 
       p++;
       subset[0] = std_ext;
@@ -964,6 +980,8 @@ static const riscv_ext_flag_table_t riscv_ext_flag_table[] =
 
   {"zicsr",    &gcc_options::x_riscv_zi_subext, MASK_ZICSR},
   {"zifencei", &gcc_options::x_riscv_zi_subext, MASK_ZIFENCEI},
+
+  {"v", &gcc_options::x_target_flags, MASK_VECTOR},
 
   {NULL, NULL, 0}
 };
