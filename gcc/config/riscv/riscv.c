@@ -5526,6 +5526,9 @@ riscv_vector_mode_supported_p (machine_mode mode)
 static machine_mode
 riscv_preferred_simd_mode (scalar_mode mode)
 {
+#if 0
+  /* Disable auto vectorization since it's broken for V extension,
+     but we'll fix and enable that later.  */
   if (TARGET_VECTOR)
     switch (mode)
       {
@@ -5546,6 +5549,7 @@ riscv_preferred_simd_mode (scalar_mode mode)
       default:
 	return word_mode;
       }
+#endif
 
   return word_mode;
 }
