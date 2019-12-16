@@ -661,9 +661,9 @@ _RVV_INT_ITERATOR_ARG (_RVV_INT_BIN_OP_SCALAR, mul)
 #define _RVV_INT_ADC_SBC_OP(SEW, LMUL, MLEN, T, OP)			\
 __extension__ extern __inline rvv_int##SEW##m##LMUL##_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vv_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
-				 rvv_int##SEW##m##LMUL##_t b,		\
-				 rvv_bool##MLEN##_t carryin)		\
+rvv_##OP##_vvm_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
+				  rvv_int##SEW##m##LMUL##_t b,		\
+				  rvv_bool##MLEN##_t carryin)		\
 {									\
   return __builtin_riscv_v##OP##int##SEW##m##LMUL (a, b, carryin);	\
 }									\
@@ -684,9 +684,9 @@ rvv_m##OP##_vv_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vv_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,		\
-				  rvv_uint##SEW##m##LMUL##_t b,		\
-				  rvv_bool##MLEN##_t carryin)		\
+rvv_##OP##_vvm_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
+				   rvv_uint##SEW##m##LMUL##_t b,	\
+				   rvv_bool##MLEN##_t carryin)		\
 {									\
   return __builtin_riscv_v##OP##uint##SEW##m##LMUL (a, b, carryin);	\
 }									\
@@ -707,9 +707,9 @@ rvv_m##OP##_vv_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
 }									\
 __extension__ extern __inline rvv_int##SEW##m##LMUL##_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vs_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
-				 int##SEW##_t b,			\
-				 rvv_bool##MLEN##_t carryin)		\
+rvv_##OP##_vsm_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
+				  int##SEW##_t b,			\
+				  rvv_bool##MLEN##_t carryin)		\
 {									\
   return __builtin_riscv_v##OP##int##SEW##m##LMUL##_scalar (a, b, carryin);\
 }									\
@@ -730,9 +730,9 @@ rvv_m##OP##_vs_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,		\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vs_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,		\
-				  uint##SEW##_t b,			\
-				  rvv_bool##MLEN##_t carryin)		\
+rvv_##OP##_vsm_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
+				   uint##SEW##_t b,			\
+				   rvv_bool##MLEN##_t carryin)		\
 {									\
   return __builtin_riscv_v##OP##uint##SEW##m##LMUL##_scalar (a, b, carryin);\
 }									\
@@ -881,13 +881,13 @@ _RVV_FLOAT_ITERATOR_ARG (_RVV_FLOAT_BIN_OP, min)
 #define _RVV_FLOAT_UNARY_OP(SEW, LMUL, MLEN, T, OP)			\
 __extension__ extern __inline rvv_float##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vv_float##SEW##m##LMUL (rvv_float##SEW##m##LMUL##_t a)	\
+rvv_##OP##_v_float##SEW##m##LMUL (rvv_float##SEW##m##LMUL##_t a)	\
 {									\
   return __builtin_riscv_vf##OP##float##SEW##m##LMUL (a);		\
 }									\
 __extension__ extern __inline rvv_float##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_##OP##_vv_float##SEW##m##LMUL##_mask (				\
+rvv_##OP##_v_float##SEW##m##LMUL##_mask (				\
   rvv_bool##MLEN##_t mask,						\
   rvv_float##SEW##m##LMUL##_t maskedoff, 				\
   rvv_float##SEW##m##LMUL##_t a)					\
@@ -975,13 +975,13 @@ _RVV_MASK_ITERATOR (_RVV_MASK_BIN_OP, ornot)
 #define _RVV_IOTA(SEW, LMUL, MLEN, T)					\
 __extension__ extern __inline rvv_uint##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_iota_m_uint##SEW##m##LMUL (rvv_bool##MLEN##_t a)			\
+rvv_iota_m_##SEW##m##LMUL (rvv_bool##MLEN##_t a)			\
 {									\
   return __builtin_riscv_viotauint##SEW##m##LMUL (a);			\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_iota_m_uint##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,		\
+rvv_iota_m_##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,		\
 				      rvv_bool##MLEN##_t a)		\
 {									\
   return __builtin_riscv_viotauint##SEW##m##LMUL##_mask (mask, a);	\
@@ -998,9 +998,10 @@ rvv_id_##SEW##m##LMUL ()						\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m##LMUL##_t		\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_id_##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask)		\
+rvv_id_##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,			\
+			      rvv_uint##SEW##m##LMUL##_t maskedoff)	\
 {									\
-  return __builtin_riscv_viduint##SEW##m##LMUL##_mask (mask);		\
+  return __builtin_riscv_viduint##SEW##m##LMUL##_mask (mask, maskedoff);\
 }
 
 
@@ -1068,7 +1069,7 @@ rvv_red##OP##_vs_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,	\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m1_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_red##OPU##_vs_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
+rvv_red##OP##_vs_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
 				      rvv_uint##SEW##m1_t b)		\
 {									\
   return __builtin_riscv_reduc_##OPU##uint##SEW##m##LMUL (b, a);	\
@@ -1084,7 +1085,7 @@ rvv_red##OP##_vs_int##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
 }									\
 __extension__ extern __inline rvv_uint##SEW##m1_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_red##OPU##_vs_uint##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
+rvv_red##OP##_vs_uint##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
 				      rvv_uint##SEW##m##LMUL##_t a,	\
 				      rvv_uint##SEW##m1_t b)		\
 {									\
@@ -1109,7 +1110,7 @@ rvv_wred##OP##_vs_int##SEW##m##LMUL (rvv_int##SEW##m##LMUL##_t a,	\
 }									\
 __extension__ extern __inline rvv_uint##WSEW##m1_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_wred##OPU##_vs_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
+rvv_wred##OP##_vs_uint##SEW##m##LMUL (rvv_uint##SEW##m##LMUL##_t a,	\
 				       rvv_uint##WSEW##m1_t b)		\
 {									\
   return __builtin_riscv_wreduc_##OPU##uint##SEW##m##LMUL (b, a);	\
@@ -1125,7 +1126,7 @@ rvv_wred##OP##_vs_int##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
 }									\
 __extension__ extern __inline rvv_uint##WSEW##m1_t			\
 __attribute__ ((__always_inline__, __gnu_inline__, __artificial__))	\
-rvv_wred##OPU##_vs_uint##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
+rvv_wred##OP##_vs_uint##SEW##m##LMUL##_mask (rvv_bool##MLEN##_t mask,	\
 				      rvv_uint##SEW##m##LMUL##_t a,	\
 				      rvv_uint##WSEW##m1_t b)		\
 {									\
