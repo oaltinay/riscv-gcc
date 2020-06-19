@@ -4569,6 +4569,18 @@ case "${target}" in
 			exit 1
 			;;
 		esac
+		# Handle --with-multilib-config.
+		if test "x${with_multilib_config}" != xdefault; then
+			if ${srcdir}/config/riscv/multilib-generator \
+				`echo ${with_multilib_config} | sed 's/\./ /g'`\
+				> t-multilib-config;
+			then
+				tmake_file="${tmake_file} riscv/t-withmultilib-config"
+			else
+				echo "invalid option for --with-multilib-config"
+				exit 1
+			fi
+		fi
 
 		# Handle --with-multilib-list.
 		if test "x${with_multilib_list}" != xdefault; then
