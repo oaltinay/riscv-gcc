@@ -61,6 +61,9 @@ riscv_implied_info_t riscv_implied_info[] =
   {"b", "zbs"},
   {"b", "zba"},
   {"b", "zbp"},
+  /* XXX: Work-around, zvbase + zvamo + zvlsseg, but zvbase not defined yet.  */
+  {"v", "zvamo"},
+  {"v", "zvlsseg"},
   {NULL, NULL}
 };
 
