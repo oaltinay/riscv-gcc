@@ -102,4 +102,18 @@ rtl_opt_pass * make_pass_shorten_memrefs (gcc::context *ctxt);
 /* Routines for vector tuple types.  */
 extern int riscv_get_nf (machine_mode);
 
+/* Information about one CPU we know about.  */
+struct riscv_cpu_info {
+  /* This CPU's canonical name.  */
+  const char *name;
+
+  /* Default arch for this CPU, could be NULL if no default arch.  */
+  const char *arch;
+
+  /* Which automaton to use for tuning.  */
+  const char *tune;
+};
+
+extern const riscv_cpu_info *riscv_find_cpu (const char *);
+
 #endif /* ! GCC_RISCV_PROTOS_H */
