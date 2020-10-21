@@ -155,7 +155,7 @@
 
 (define_insn "*sbsetiw"
   [(set (match_operand:DI 0 "register_operand" "=r")
-	(ior:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "=r"))
+	(ior:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "r"))
 		(match_operand 2 "single_bit_mask_operand" "i")))]
   "TARGET_64BIT && TARGET_BITMANIP"
   "sbsetiw\t%0,%1,%S2"
@@ -193,7 +193,7 @@
 
 (define_insn "*sbclriw"
   [(set (match_operand:DI 0 "register_operand" "=r")
-	(and:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "=r"))
+	(and:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "r"))
 		(match_operand 2 "not_single_bit_mask_operand" "i")))]
   "TARGET_64BIT && TARGET_BITMANIP"
   "sbclriw\t%0,%1,%T2"
@@ -230,7 +230,7 @@
 
 (define_insn "*sbinviw"
   [(set (match_operand:DI 0 "register_operand" "=r")
-	(xor:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "=r"))
+	(xor:DI (sign_extend:DI (match_operand:SI 1 "register_operand" "r"))
 		(match_operand 2 "single_bit_mask_operand" "i")))]
   "TARGET_64BIT && TARGET_BITMANIP"
   "sbinviw\t%0,%1,%S2"
