@@ -57,6 +57,10 @@ struct riscv_implied_info_t
 riscv_implied_info_t riscv_implied_info[] =
 {
   {"d", "f"},
+  {"b", "zbb"},
+  {"b", "zbs"},
+  {"b", "zba"},
+  {"b", "zbp"},
   {NULL, NULL}
 };
 
@@ -661,6 +665,12 @@ static const riscv_ext_flag_table_t riscv_ext_flag_table[] =
   {"f", &gcc_options::x_target_flags, MASK_HARD_FLOAT},
   {"d", &gcc_options::x_target_flags, MASK_DOUBLE_FLOAT},
   {"c", &gcc_options::x_target_flags, MASK_RVC},
+  {"v", &gcc_options::x_target_flags, MASK_VECTOR},
+  {"zfh", &gcc_options::x_target_flags, MASK_RVZFH},
+  {"b", &gcc_options::x_target_flags, MASK_BITMANIP},
+  {"zba", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBA},
+  {"zbb", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBB},
+  {"zbs", &gcc_options::x_riscv_bitmanip_subext, MASK_ZBS},
   {NULL, NULL, 0}
 };
 
@@ -700,24 +710,6 @@ riscv_parse_arch_string (const char *isa,
 	    opts->*arch_ext_flag_tab->var_ref |= arch_ext_flag_tab->mask;
 	}
     }
-
-  *flags &= ~MASK_VECTOR;
-  if (subset_list->lookup ("v"))
-    *flags |= MASK_VECTOR;
-
-  *flags &= ~MASK_RVZFH;
-  if (subset_list->lookup ("zfh"))
-    {
-      if (!(*flags & MASK_HARD_FLOAT))
-	error_at (loc, "%<-march=%s%>: `zfh` extension requires `f' extension",
-		  isa);
-
-      *flags |= MASK_RVZFH;
-    }
-
-  *flags &= ~MASK_BITMANIP;
-  if (subset_list->lookup ("b"))
-    *flags |= MASK_BITMANIP;
 
   if (current_subset_list)
     delete current_subset_list;
