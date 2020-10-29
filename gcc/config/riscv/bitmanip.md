@@ -19,8 +19,6 @@
 
 (define_code_iterator bitmanip_bitwise [and ior])
 
-(define_code_iterator any_minmax [smin smax umin umax])
-
 (define_code_attr bitmanip_optab [(smin "smin")
 				  (smax "smax")
 				  (umin "umin")

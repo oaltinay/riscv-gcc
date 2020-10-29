@@ -480,6 +480,8 @@
 ;; from the same template.
 (define_code_iterator any_mod [mod umod])
 
+(define_code_iterator any_minmax [smin smax umin umax])
+
 ;; These code iterators allow the signed and unsigned scc operations to use
 ;; the same template.
 (define_code_iterator any_gt [gt gtu])
