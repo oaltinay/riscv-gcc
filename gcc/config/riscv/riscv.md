@@ -1222,7 +1222,7 @@
   [(set (match_operand:DI     0 "register_operand"     "=r,r")
 	(zero_extend:DI
 	    (match_operand:SI 1 "nonimmediate_operand" " r,m")))]
-  "TARGET_64BIT && !TARGET_BITMANIP"
+  "TARGET_64BIT && !TARGET_ZBB"
   "@
    #
    lwu\t%0,%1"
@@ -2045,7 +2045,7 @@
 			   (match_operand:QI 2 "immediate_operand" "I"))
 		(match_operand 3 "immediate_operand" "")))
    (clobber (match_scratch:DI 4 "=&r"))]
-  "TARGET_64BIT
+  "TARGET_64BIT && !TARGET_BITMANIP
    && ((INTVAL (operands[3]) >> INTVAL (operands[2])) == 0xffffffff)"
   "#"
   "&& reload_completed"
