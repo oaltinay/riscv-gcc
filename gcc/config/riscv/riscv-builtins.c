@@ -48,6 +48,8 @@ enum riscv_function_type {
   RISCV_MAX_FTYPE_MAX
 };
 
+// TODO: Add builtins here?
+
 /* Specifies how a built-in function should be converted into rtl.  */
 enum riscv_builtin_type {
   /* The function corresponds directly to an .md pattern.  */
