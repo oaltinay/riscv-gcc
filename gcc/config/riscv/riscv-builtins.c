@@ -48,8 +48,6 @@ enum riscv_function_type {
   RISCV_MAX_FTYPE_MAX
 };
 
-//TODO: Add builtins here?
-
 /* Specifies how a built-in function should be converted into rtl.  */
 enum riscv_builtin_type {
   /* The function corresponds directly to an .md pattern.  */
@@ -128,7 +126,9 @@ AVAIL (hard_float, TARGET_HARD_FLOAT)
 
 static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_BUILTIN (frflags, RISCV_USI_FTYPE_VOID, hard_float),
-  DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float)
+  DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float),
+  // ! Custom builtin
+  DIRECT_BUILTIN(cust0, RISCV_INT_FTYPE_INT_INT, NULL)
 };
 
 /* Index I is the function declaration for riscv_builtins[I], or null if the

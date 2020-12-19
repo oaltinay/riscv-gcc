@@ -2512,6 +2512,17 @@
   DONE;
 })
 
+;; Custom instruction
+
+(define_insn "cust0"
+  [(set 
+    (match_operand:SI 0 "register_operand" "=r")
+    (match_operand:SI 1 "register_operand" "r")
+    (match_operand:SI 2 "register_operand" "r")
+  )]
+  "cust0\t%0,%1,%2"
+)
+
 (include "sync.md")
 (include "peephole.md")
 (include "pic.md")
