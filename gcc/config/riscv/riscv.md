@@ -2512,16 +2512,30 @@
   DONE;
 })
 
+
 ;; Custom instruction
 
-(define_insn "cust0"
-  [(set 
-    (match_operand:SI 0 "register_operand" "=r")
-    (match_operand:SI 1 "register_operand" "r")
-    (match_operand:SI 2 "register_operand" "r")
-  )]
-  "cust0\t%0,%1,%2"
-)
+;;  ""
+;;  "cust1\t%0,%1,%2") ;Try this instead of c code below.
+
+
+
+(define_insn "riscv_cust0"
+  [(match_operand:SI 0 "register_operand" "=r")
+   (match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "register_operand" "r")]
+
+  ""
+{
+  rtx xoperands[3];
+  xoperands[0] = operands[0]; 
+  xoperands[1] = operands[1];
+  xoperands[2] = operands[2];
+  output_asm_insn("cust0\t%0,%1,%2", xoperands);
+  return "";
+})
+
+
 
 (include "sync.md")
 (include "peephole.md")
