@@ -39,6 +39,7 @@ along with GCC; see the file COPYING3.  If not see
 
 /* Macros to create an enumeration identifier for a function prototype.  */
 #define RISCV_FTYPE_NAME1(A, B) RISCV_##A##_FTYPE_##B
+// ! For custom builtin function
 #define RISCV_FTYPE_NAME2(A, B, C) RISCV_##A##_FTYPE_##B##_##C
 
 /* Classifies the prototype of a built-in function.  */
@@ -119,6 +120,7 @@ AVAIL (hard_float, TARGET_HARD_FLOAT)
 /* Argument types.  */
 #define RISCV_ATYPE_VOID void_type_node
 #define RISCV_ATYPE_USI unsigned_intSI_type_node
+// ! For custom builtin function
 #define RISCV_ATYPE_INT integer_type_node
 
 /* RISCV_FTYPE_ATYPESN takes N RISCV_FTYPES-like type codes and lists
@@ -132,7 +134,7 @@ AVAIL (hard_float, TARGET_HARD_FLOAT)
 static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_BUILTIN (frflags, RISCV_USI_FTYPE_VOID, hard_float),
   DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float),
-  // ! Custom builtin
+  // ! Custom builtin function
   DIRECT_BUILTIN(cust0, RISCV_INT_FTYPE_INT_INT, hard_float)
 };
 
