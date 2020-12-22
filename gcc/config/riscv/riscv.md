@@ -76,6 +76,12 @@
   UNSPECV_BLOCKAGE
   UNSPECV_FENCE
   UNSPECV_FENCE_I
+
+  ;; Custom insns
+  UNSPECV_CUST0
+  UNSPECV_CUST1
+  UNSPECV_CUST2
+  UNSPECV_CUST3
 ])
 
 (define_constants
@@ -2515,15 +2521,10 @@
 
 ;; Custom instruction
 
-;;  ""
-;;  "cust1\t%0,%1,%2") ;Try this instead of c code below.
-
-
-
 (define_insn "riscv_cust0"
-  [(match_operand:SI 0 "register_operand" "=r")
+  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
    (match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]
+   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST0)]
 
   ""
 {
@@ -2535,7 +2536,44 @@
   return "";
 })
 
+(define_insn "riscv_cust1"
+  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
+   (match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST1)]
 
+  ""
+{
+  rtx xoperands[3];
+  xoperands[0] = operands[0]; 
+  xoperands[1] = operands[1];
+  xoperands[2] = operands[2];
+  output_asm_insn("cust1\t%0,%1,%2", xoperands);
+  return "";
+})
+
+(define_insn "riscv_cust2"
+  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
+   (match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST2)]
+
+  ""
+{
+  rtx xoperands[3];
+  xoperands[0] = operands[0]; 
+  xoperands[1] = operands[1];
+  xoperands[2] = operands[2];
+  output_asm_insn("cust2\t%0,%1,%2", xoperands);
+  return "";
+})
+
+(define_insn "riscv_cust3"
+  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
+   (match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST3)]
+
+  ""
+  "cust3\t%0,%1,%2"
+)
 
 (include "sync.md")
 (include "peephole.md")

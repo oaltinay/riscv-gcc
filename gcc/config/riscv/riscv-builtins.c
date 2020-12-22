@@ -135,7 +135,10 @@ static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_BUILTIN (frflags, RISCV_USI_FTYPE_VOID, hard_float),
   DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float),
   // ! Custom builtin function
-  DIRECT_BUILTIN(cust0, RISCV_INT_FTYPE_INT_INT, hard_float)
+  DIRECT_BUILTIN(cust1, RISCV_INT_FTYPE_INT_INT, hard_float),
+  DIRECT_BUILTIN(cust0, RISCV_INT_FTYPE_INT_INT, hard_float),
+  DIRECT_BUILTIN(cust2, RISCV_INT_FTYPE_INT_INT, hard_float),
+  DIRECT_BUILTIN(cust3, RISCV_INT_FTYPE_INT_INT, hard_float)
 };
 
 /* Index I is the function declaration for riscv_builtins[I], or null if the
