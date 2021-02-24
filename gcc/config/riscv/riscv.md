@@ -78,9 +78,9 @@
   UNSPECV_FENCE_I
 
   ;; Custom insns
-  UNSPECV_CUST0
-  UNSPECV_CUST1
-  UNSPECV_CUST2
+  UNSPECV_ROT
+  UNSPECV_ROTI
+  UNSPECV_SBOX
   UNSPECV_CUST3
 ])
 
@@ -2518,62 +2518,48 @@
   DONE;
 })
 
-
 ;; Custom instruction
 
-(define_insn "riscv_cust0"
-  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
-   (match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST0)]
+;; ROTR32
 
+(define_insn "riscv_rot"
+  [(set(match_operand:SI 0 "register_operand" "=r,r")
+   (unspec_volatile[(match_operand:SI 1 "register_operand" "r,r")
+   (match_operand:SI 2 "arith_operand"   "r,I")]
+    UNSPECV_ROT))]
   ""
-{
-  rtx xoperands[3];
-  xoperands[0] = operands[0]; 
-  xoperands[1] = operands[1];
-  xoperands[2] = operands[2];
-  output_asm_insn("cust0\t%0,%1,%2", xoperands);
-  return "";
-})
+  "rot%i2\t%0,%1,%2"
+)
 
-(define_insn "riscv_cust1"
-  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
-   (match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST1)]
+;;(define_insn "riscv_roti"
+;;  [(unspec_volatile[(match_operand:SI 0 "register_operand" "r")
+;;   (match_operand:SI 1 "register_operand" "r")
+;;   (match_operand:SI 2 "const_int_operand" "I")]
+;;    UNSPECV_ROTI)]
+;;  ""
+;;  "roti\t%0,%1,%2"
+;;)
 
+;; SBOX
+
+(define_insn "riscv_sbox"
+  [(set(match_operand:SI 0 "register_operand" "=r")
+   (unspec_volatile[(match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "register_operand" "r")]
+    UNSPECV_SBOX))]
   ""
-{
-  rtx xoperands[3];
-  xoperands[0] = operands[0]; 
-  xoperands[1] = operands[1];
-  xoperands[2] = operands[2];
-  output_asm_insn("cust1\t%0,%1,%2", xoperands);
-  return "";
-})
-
-(define_insn "riscv_cust2"
-  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
-   (match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST2)]
-
-  ""
-{
-  rtx xoperands[3];
-  xoperands[0] = operands[0]; 
-  xoperands[1] = operands[1];
-  xoperands[2] = operands[2];
-  output_asm_insn("cust2\t%0,%1,%2", xoperands);
-  return "";
-})
+  "sbox\t%0,%1,%2"
+)
 
 (define_insn "riscv_cust3"
-  [(unspec_volatile[(match_operand:SI 0 "register_operand" "=r")
-   (match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]UNSPECV_CUST3)]
-
+  [(set(match_operand:SI 0 "register_operand" "=r")
+   (unspec_volatile[(match_operand:SI 1 "register_operand" "r")
+   (match_operand:SI 2 "const_int_operand" "I")]
+    UNSPECV_CUST3))]
   ""
   "cust3\t%0,%1,%2"
 )
+
 
 (include "sync.md")
 (include "peephole.md")

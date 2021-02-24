@@ -87,6 +87,7 @@ struct riscv_builtin_description {
 };
 
 AVAIL (hard_float, TARGET_HARD_FLOAT)
+AVAIL (rv_base, 1)
 
 /* Construct a riscv_builtin_description from the given arguments.
 
@@ -122,6 +123,7 @@ AVAIL (hard_float, TARGET_HARD_FLOAT)
 #define RISCV_ATYPE_USI unsigned_intSI_type_node
 // ! For custom builtin function
 #define RISCV_ATYPE_INT integer_type_node
+#define RISCV_ATYPE_INTPTR integer_ptr_type_node
 
 /* RISCV_FTYPE_ATYPESN takes N RISCV_FTYPES-like type codes and lists
    their associated RISCV_ATYPEs.  */
@@ -135,10 +137,10 @@ static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_BUILTIN (frflags, RISCV_USI_FTYPE_VOID, hard_float),
   DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float),
   // ! Custom builtin function
-  DIRECT_BUILTIN(cust1, RISCV_INT_FTYPE_INT_INT, hard_float),
-  DIRECT_BUILTIN(cust0, RISCV_INT_FTYPE_INT_INT, hard_float),
-  DIRECT_BUILTIN(cust2, RISCV_INT_FTYPE_INT_INT, hard_float),
-  DIRECT_BUILTIN(cust3, RISCV_INT_FTYPE_INT_INT, hard_float)
+  DIRECT_BUILTIN(rot,  RISCV_USI_FTYPE_USI_USI,    rv_base),
+  DIRECT_BUILTIN(roti, RISCV_USI_FTYPE_USI_USI,    rv_base),
+  DIRECT_BUILTIN(sbox, RISCV_USI_FTYPE_INTPTR_USI, rv_base),
+  DIRECT_BUILTIN(cust3,RISCV_USI_FTYPE_USI_USI,    rv_base)
 };
 
 /* Index I is the function declaration for riscv_builtins[I], or null if the

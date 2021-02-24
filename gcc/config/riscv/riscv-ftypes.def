@@ -29,4 +29,5 @@ along with GCC; see the file COPYING3.  If not see
 DEF_RISCV_FTYPE (1, (USI, VOID))
 DEF_RISCV_FTYPE (1, (VOID, USI))
 // ! Custom builtin function
-DEF_RISCV_FTYPE (2, (INT, INT, INT))
+DEF_RISCV_FTYPE (2, (USI, USI, USI))
+DEF_RISCV_FTYPE (2, (USI, INTPTR, USI))
