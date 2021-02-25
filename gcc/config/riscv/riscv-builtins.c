@@ -138,7 +138,7 @@ static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_NO_TARGET_BUILTIN (fsflags, RISCV_VOID_FTYPE_USI, hard_float),
   // ! Custom builtin function
   DIRECT_BUILTIN(rot,  RISCV_USI_FTYPE_USI_USI,    rv_base),
-  DIRECT_BUILTIN(roti, RISCV_USI_FTYPE_USI_USI,    rv_base),
+  //DIRECT_BUILTIN(roti, RISCV_USI_FTYPE_USI_USI,    rv_base),
   DIRECT_BUILTIN(sbox, RISCV_USI_FTYPE_INTPTR_USI, rv_base),
   DIRECT_BUILTIN(cust3,RISCV_USI_FTYPE_USI_USI,    rv_base)
 };
