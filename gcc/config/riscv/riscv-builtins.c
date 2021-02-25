@@ -140,7 +140,7 @@ static const struct riscv_builtin_description riscv_builtins[] = {
   DIRECT_BUILTIN(rot,  RISCV_USI_FTYPE_USI_USI,    rv_base),
   //DIRECT_BUILTIN(roti, RISCV_USI_FTYPE_USI_USI,    rv_base),
   DIRECT_BUILTIN(sbox, RISCV_USI_FTYPE_INTPTR_USI, rv_base),
-  DIRECT_BUILTIN(cust3,RISCV_USI_FTYPE_USI_USI,    rv_base)
+  //DIRECT_BUILTIN(cust3,RISCV_USI_FTYPE_USI_USI,    rv_base)
 };
 
 /* Index I is the function declaration for riscv_builtins[I], or null if the

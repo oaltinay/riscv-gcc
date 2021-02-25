@@ -2521,7 +2521,6 @@
 ;; Custom instruction
 
 ;; ROTR32
-
 (define_insn "riscv_rot"
   [(set(match_operand:SI 0 "register_operand" "=r,r")
    (unspec_volatile[(match_operand:SI 1 "register_operand" "r,r")
@@ -2531,35 +2530,15 @@
   "rot%i2\t%0,%1,%2"
 )
 
-;;(define_insn "riscv_roti"
-;;  [(unspec_volatile[(match_operand:SI 0 "register_operand" "r")
-;;   (match_operand:SI 1 "register_operand" "r")
-;;   (match_operand:SI 2 "const_int_operand" "I")]
-;;    UNSPECV_ROTI)]
-;;  ""
-;;  "roti\t%0,%1,%2"
-;;)
-
 ;; SBOX
-
 (define_insn "riscv_sbox"
-  [(set(match_operand:SI 0 "register_operand" "=r")
-   (unspec_volatile[(match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "register_operand" "r")]
+  [(set(match_operand:SI 0 "register_operand" "=r,r")
+   (unspec_volatile[(match_operand:SI 1 "register_operand" "r,r")
+   (match_operand:SI 2 "arith_operand"   "r,I")]
     UNSPECV_SBOX))]
   ""
-  "sbox\t%0,%1,%2"
+  "sbox%i2\t%0,%1,%2"
 )
-
-(define_insn "riscv_cust3"
-  [(set(match_operand:SI 0 "register_operand" "=r")
-   (unspec_volatile[(match_operand:SI 1 "register_operand" "r")
-   (match_operand:SI 2 "const_int_operand" "I")]
-    UNSPECV_CUST3))]
-  ""
-  "cust3\t%0,%1,%2"
-)
-
 
 (include "sync.md")
 (include "peephole.md")
