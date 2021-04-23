@@ -48,6 +48,10 @@
 ])
 
 (define_c_enum "unspecv" [
+
+  UNSPECV_ROT
+  UNSPECV_SBOX
+
   ;; Register save and restore.
   UNSPECV_GPR_SAVE
   UNSPECV_GPR_RESTORE
@@ -76,12 +80,6 @@
   UNSPECV_BLOCKAGE
   UNSPECV_FENCE
   UNSPECV_FENCE_I
-
-  ;; Custom insns
-  UNSPECV_ROT
-  UNSPECV_ROTI
-  UNSPECV_SBOX
-  UNSPECV_CUST3
 ])
 
 (define_constants
